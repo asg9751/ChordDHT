@@ -37,7 +37,7 @@ public class TCPSystem {
         this.serverI = serverI;
     }
 
-    public void startMessageServer()
+    public void startRegServer()
     {
         new Thread()
         {

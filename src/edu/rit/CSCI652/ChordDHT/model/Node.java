@@ -4,7 +4,7 @@ public class Node{
 
     private int nodeID;
     private String nodeIP;
-    private String nodePort;
+    private int nodePort;
 
     public int getNodeID() {
         return nodeID;
@@ -22,15 +22,15 @@ public class Node{
         this.nodeIP = nodeIP;
     }
 
-    public String getNodePort() {
+    public int getNodePort() {
         return nodePort;
     }
 
-    public void setNodePort(String nodePort) {
+    public void setNodePort(int nodePort) {
         this.nodePort = nodePort;
     }
 
-    public Node(int id, String ip, String port){
+    public Node(int id, String ip, int port){
         this.nodeID = id;
         this.nodeIP = ip;
         this.nodePort = port;

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ChordMenu {
     ChordMenuInterface menuInterface;
 
-    public void setPubSubMenuInterface(ChordMenuInterface chordMenuInterface) {
+    public void setChordMenuInterface(ChordMenuInterface chordMenuInterface) {
         this.menuInterface = chordMenuInterface;
     }
 

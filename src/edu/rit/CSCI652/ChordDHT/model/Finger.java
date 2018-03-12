@@ -6,7 +6,7 @@ public class Finger{
     private int start;
     private int intervalStart;
     private int intervalEnd;
-    private Node successor;
+    private int successor;
 
     public int getIndex() {
         return index;
@@ -40,16 +40,20 @@ public class Finger{
         this.intervalEnd = intervalEnd;
     }
 
-    public Node getSuccessor() {
+    public int getSuccessor() {
         return successor;
     }
 
-    public void setSuccessor(Node successor) {
+    public void setSuccessor(int successor) {
         this.successor = successor;
     }
 
-    public Finger(int start, Node successor) {
+    public Finger(int start, int successor) {
         this.start = start;
         this.successor = successor;
+    }
+
+    public Finger() {
+
     }
 }
