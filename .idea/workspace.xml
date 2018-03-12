@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e11443fd-b61e-490b-9f3d-413d11444b8a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordMenu.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/TCPSystem.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/TCPSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Finger.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Finger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Node.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Node.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegistrationServer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RegistrationServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
+            <state relative-caret-position="810">
+              <caret line="54" column="61" lean-forward="false" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -85,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChordNode.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChordNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="58" column="8" lean-forward="false" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+            <state relative-caret-position="350">
+              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -100,8 +92,8 @@
       <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="390">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#244#245#0" expanded="true" />
                 <element signature="e#275#276#0" expanded="true" />
@@ -156,10 +148,10 @@
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordMenu.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/TCPSystem.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Node.java" />
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java" />
-        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Finger.java" />
         <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java" />
+        <option value="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java" />
       </list>
     </option>
   </component>
@@ -232,7 +224,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -391,16 +383,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1520751765793</updated>
-      <workItem from="1520751767410" duration="18989000" />
+      <workItem from="1520751767410" duration="20045000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18989000" />
+    <option name="totallyTimeSpent" value="20045000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -410,9 +401,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5028612" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.49713877" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32889965" sideWeight="0.49713877" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -476,28 +467,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="37" column="59" lean-forward="true" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="390">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="e#244#245#0" expanded="true" />
             <element signature="e#275#276#0" expanded="true" />
@@ -519,10 +492,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="32" column="38" lean-forward="false" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="58" column="8" lean-forward="false" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+        <state relative-caret-position="350">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="54" column="61" lean-forward="false" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
