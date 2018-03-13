@@ -144,6 +144,30 @@ public class ChordNode {
                             contentList.add(content);
                             System.out.println("Inserted content "+content+" at node "+myNodeID);
                             break;
+
+                        case Message.GET_CONTENT:
+                            String compareStr = recvdMessage.getContent();
+                            String matchingStr = "No matching content";
+                            for(String str:contentList){
+                                if(str.equals(compareStr)){
+                                    matchingStr = str;
+                                }
+                            }
+                            sendMessage = new Message();
+                            sendMessage.setType(Message.RETURN_GET_CONTENT);
+                            sendMessage.setContent(matchingStr);
+                            try {
+                                tcpSystem.sendMessage(sendMessage, ip, port);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("Returning content >>> "+matchingStr+" from node "+myNodeID);
+                            break;
+
+                        case Message.RETURN_GET_CONTENT:
+                            String contentStr = recvdMessage.getContent();
+                            System.out.println("Content is >>> "+contentStr);
+                            break;
                     }
                 }
             });
@@ -168,16 +192,23 @@ public class ChordNode {
                     System.out.print("Please enter the content: ");
                     String content = input.nextLine();
                     insertContent(key, content, tcpSystem);
+                    chordMenu.showMenu();
                 }
 
                 @Override
                 public void invokeLookup(){
-
+                    Scanner inp = new Scanner(System.in);
+                    System.out.print("Please enter key for lookup: ");
+                    int key = Integer.valueOf(inp.nextLine());
+                    System.out.print("Please enter the content: ");
+                    String content = inp.nextLine();
+                    lookupContent(key, content, tcpSystem);
+                    chordMenu.showMenu();
                 }
 
                 @Override
                 public void invokeRemove(){
-
+                // Same as lookup. Find the successor from key and remove the word from contentList
                 }
             });
 
@@ -423,6 +454,27 @@ public class ChordNode {
             e.printStackTrace();
         }
         System.out.println(" *** Content inserted succesfully ***");
+    }
+
+    public static void lookupContent(int key, String content, TCPSystem tcpSystem){
+        System.out.println("*** Lookup key "+ key +" Content "+content+" clear***");
+        int successor = findSuccessor(key, tcpSystem);
+
+        Message message = new Message();
+        message.setType(Message.GET_CONTENT);
+        message.setNodeID(successor);
+        message.setContent(content);
+        Node n = nodeList[successor];
+        try {
+            tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static int findSuccessor(int id, TCPSystem tcpSystem){

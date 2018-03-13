@@ -24,6 +24,8 @@ public class Message {
     public static final int RETURN_CLOSESTFINGER = 10;
     public static final int UPDATE_FINGERS = 11;
     public static final int INSERT_CONTENT = 12;
+    public static final int GET_CONTENT = 13;
+    public static final int RETURN_GET_CONTENT = 14;
 
     public String getContent() {
         return content;
