@@ -3,13 +3,14 @@ package edu.rit.CSCI652.ChordDHT.model;
 public class Message {
     private int type;
     private int nodeID;
-    private int predID;
     private int maxNodes;
     private int index;
     private String ip;
     private int port;
     private String content;
-    Node[] nodeList;
+
+    private Node node;
+    private Node prev;
 
     public static final int NODE_AUTHENTICATION = 0;
     public static final int RETURN_NODE_AUTHENTICATION = 1;
@@ -26,6 +27,22 @@ public class Message {
     public static final int INSERT_CONTENT = 12;
     public static final int GET_CONTENT = 13;
     public static final int RETURN_GET_CONTENT = 14;
+
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
+
+    public Node getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Node prev) {
+        this.prev = prev;
+    }
 
     public String getContent() {
         return content;
@@ -65,23 +82,6 @@ public class Message {
 
     public void setMaxNodes(int maxNodes) {
         this.maxNodes = maxNodes;
-    }
-
-
-    public int getPredID() {
-        return predID;
-    }
-
-    public void setPredID(int predID) {
-        this.predID = predID;
-    }
-
-    public Node[] getNodeList() {
-        return nodeList;
-    }
-
-    public void setNodeList(Node[] nodeList) {
-        this.nodeList = nodeList;
     }
 
     public int getType() {

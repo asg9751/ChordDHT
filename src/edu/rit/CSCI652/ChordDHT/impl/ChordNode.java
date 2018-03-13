@@ -13,12 +13,12 @@ public class ChordNode {
     public static final int SEND_PORT = 6789;
     public static final int RECEIVE_PORT = 6790;
     private static Finger[] fingerTable;
-    //TCPSystem tcpSystem;
     private static int myNodeID = 0;
     private static int myPrevID = 0;
+    private static Node myNode;
+    private static Node prevNode;
     private static int nodesMax = 0;
-    private static Node[] nodeList;
-    private static HashMap<Integer,List<Integer>> resultMap = new HashMap<Integer,List<Integer>>();
+    private static HashMap<Integer,Node> resultMap = new HashMap<Integer,Node>();
     private static List<String>  contentList = new ArrayList<String>();
 
     public static void main(String[] args) {
@@ -37,28 +37,27 @@ public class ChordNode {
 
                         case Message.RETURN_NODE_AUTHENTICATION:
 
-                            int nodeID = recvdMessage.getNodeID();
-                            int predID = recvdMessage.getPredID();
-                            int maxNodes = recvdMessage.getMaxNodes();
-                            myNodeID = nodeID;
-                            myPrevID = predID;
-                            nodesMax = maxNodes;
-                            nodeList = recvdMessage.getNodeList();
-                            Logging.print("Server sent nodeID " + nodeID);
-                            Logging.print("Server sent predID " + predID);
-                            Logging.print("Max nodes " + maxNodes);
+                            myNode = recvdMessage.getNode();
+                            prevNode = recvdMessage.getPrev();
+                            myNodeID = myNode.getNodeID();
+                            myPrevID = prevNode.getNodeID();
+                            nodesMax = recvdMessage.getMaxNodes();
+
+                            Logging.print("Server sent nodeID " + myNodeID);
+                            Logging.print("Server sent predID " + myPrevID);
+                            Logging.print("Max nodes " + nodesMax);
                             // create finger table here
-                            buildFingerTables(nodeID, predID, maxNodes, nodeList, tcpSystem);
+                            buildFingerTables(myNode, prevNode, nodesMax, tcpSystem);
                             // show chord menu
                             chordMenu.showMenu();
                             break;
 
                         case Message.FIND_SUCCESSOR:
                             int id = recvdMessage.getNodeID();
-                            int fid = findSuccessor(id,tcpSystem);
+                            Node fid = findSuccessor(id,tcpSystem);
                             sendMessage = new Message();
                             sendMessage.setType(Message.RETURN_FIND_SUCCESSOR);
-                            sendMessage.setNodeID(fid);
+                            sendMessage.setNode(fid);
                             try {
                                 tcpSystem.sendMessage(sendMessage, ip, port);
                             } catch (IOException e) {
@@ -67,15 +66,16 @@ public class ChordNode {
                             break;
 
                         case Message.RETURN_FIND_SUCCESSOR:
-                            int rid = recvdMessage.getNodeID();
-                            resultMap.put(Message.RETURN_FIND_SUCCESSOR, Arrays.asList(rid));
+                            Node rid = recvdMessage.getNode();
+                            resultMap.put(Message.RETURN_FIND_SUCCESSOR, rid);
                             break;
 
                         case Message.GET_SUCCESSOR:
-                            int sucID = getSuccessor();
+                            Node suc = getSuccessor();
                             sendMessage = new Message();
                             sendMessage.setType(Message.RETURN_SUCCESSOR);
-                            sendMessage.setNodeID(sucID);
+                            sendMessage.setNodeID(suc.getNodeID());
+                            sendMessage.setNode(suc);
                             try {
                                 tcpSystem.sendMessage(sendMessage, ip, port);
                             } catch (IOException e) {
@@ -84,15 +84,15 @@ public class ChordNode {
                             break;
 
                         case Message.RETURN_SUCCESSOR:
-                            int suID = recvdMessage.getNodeID();
-                            Logging.print(" Return successor "+suID);
-                            resultMap.put(Message.RETURN_SUCCESSOR, Arrays.asList(suID));
+                            Node su = recvdMessage.getNode();
+                            Logging.print(" Return successor "+su.getNodeID());
+                            resultMap.put(Message.RETURN_SUCCESSOR, su);
                             break;
 
                         case Message.GET_PREDECESSOR:
                             sendMessage = new Message();
                             sendMessage.setType(Message.RETURN_GET_PREDECESSOR);
-                            sendMessage.setNodeID(myPrevID);
+                            sendMessage.setNode(prevNode);
                             try {
                                 tcpSystem.sendMessage(sendMessage, ip, port);
                             } catch (IOException e) {
@@ -101,22 +101,23 @@ public class ChordNode {
                             break;
 
                         case Message.RETURN_GET_PREDECESSOR:
-                            int predd = recvdMessage.getNodeID();
-                            Logging.print(" Return predecessor "+predd);
-                            resultMap.put(Message.RETURN_GET_PREDECESSOR, Arrays.asList(predd));
+                            Node predd = recvdMessage.getNode();
+                            Logging.print(" Return predecessor "+predd.getNodeID());
+                            resultMap.put(Message.RETURN_GET_PREDECESSOR, predd);
                             break;
 
                         case Message.SET_PREDECESSOR:
-                            int pre = recvdMessage.getNodeID();
-                            myPrevID = pre;
+                            Node pre = recvdMessage.getNode();
+                            prevNode = pre;
+                            myPrevID = pre.getNodeID();
                             break;
 
                         case Message.GET_CLOSESTFINGER:
                             int fingid = recvdMessage.getNodeID();
-                            int finger = closestPrecedingFinger(fingid);
+                            Node finger = closestPrecedingFinger(fingid);
                             sendMessage = new Message();
                             sendMessage.setType(Message.RETURN_CLOSESTFINGER);
-                            sendMessage.setNodeID(finger);
+                            sendMessage.setNode(finger);
                             try {
                                 tcpSystem.sendMessage(sendMessage, ip, port);
                             } catch (IOException e) {
@@ -125,9 +126,9 @@ public class ChordNode {
                             break;
 
                         case Message.RETURN_CLOSESTFINGER:
-                            int cloId = recvdMessage.getNodeID();
-                            Logging.print(" Return closest finger "+cloId);
-                            resultMap.put(Message.RETURN_CLOSESTFINGER, Arrays.asList(cloId));
+                            Node clo = recvdMessage.getNode();
+                            Logging.print(" Return closest finger "+clo.getNodeID());
+                            resultMap.put(Message.RETURN_CLOSESTFINGER, clo);
                             break;
 
                         case Message.UPDATE_FINGERS:
@@ -218,23 +219,23 @@ public class ChordNode {
         authenticate(tcpSystem, nodeID);
     }
 
-    private static void buildFingerTables(int nodeID, int predID, int maxNodes, Node[] nodeList, TCPSystem tcpSystem){
+    private static void buildFingerTables(Node node, Node pred, int maxNodes, TCPSystem tcpSystem){
         int rows = (int)Math.ceil(Math.log(maxNodes) / Math.log(2));
         fingerTable = new Finger[rows+1];
 
         // Set start and interval for finger table
-        setFingerTableInterval(fingerTable, nodeID, maxNodes);
+        setFingerTableInterval(fingerTable, node, maxNodes);
         // Set successor in finger table
-        setFingerTableSuccessor(fingerTable, nodeID, predID, nodeList, tcpSystem);
+        setFingerTableSuccessor(fingerTable, node, pred, tcpSystem);
     }
 
-    private static void setFingerTableInterval(Finger[] fingerTable, int nodeID, int maxNodes){
+    private static void setFingerTableInterval(Finger[] fingerTable, Node node, int maxNodes){
         int maxRowIndex = fingerTable.length -1;
 
         for (int i = 1; i <= maxRowIndex; i++) {
             fingerTable[i] = new Finger();
             fingerTable[i].setIndex(i-1);
-            fingerTable[i].setStart((nodeID + (int)Math.pow(2,i-1)) % maxNodes);
+            fingerTable[i].setStart((node.getNodeID() + (int)Math.pow(2,i-1)) % maxNodes);
         }
         for (int j = 1; j < maxRowIndex; j++) {
             fingerTable[j].setIntervalStart(fingerTable[j].getStart());
@@ -244,17 +245,17 @@ public class ChordNode {
         fingerTable[maxRowIndex].setIntervalEnd(fingerTable[1].getStart()-1);
     }
 
-    private static void setFingerTableSuccessor(Finger[] fingerTable, int nodeID, int predID, Node[] nodeList, TCPSystem tcpSystem){
+    private static void setFingerTableSuccessor(Finger[] fingerTable, Node node, Node pred, TCPSystem tcpSystem){
         int maxRowIndex = fingerTable.length -1;
 
         for (int i = 1; i <= maxRowIndex; i++) {
-            fingerTable[i].setSuccessor(nodeID);
+            fingerTable[i].setSuccessor(node);
         }
 
-        if (predID != nodeID) {
+        if (pred.getNodeID() != node.getNodeID()) {
             try {
                 // Initiate finger table using predecessor
-                initFingerTable(predID, nodeList, tcpSystem);
+                initFingerTable(pred, tcpSystem);
                 Logging.print("Finger table initialized");
                 // Update finger table of other nodes
                 updateOthers(tcpSystem);
@@ -265,12 +266,12 @@ public class ChordNode {
         }
     }
 
-    public static void initFingerTable(int predID, Node[] nodeList, TCPSystem tcpSystem){
+    public static void initFingerTable(Node prev, TCPSystem tcpSystem){
         // Find successor of predecessor
         Message message = new Message();
         message.setType(Message.FIND_SUCCESSOR);
         message.setNodeID(fingerTable[1].getStart());
-        Node prev = nodeList[predID];
+
         try {
             tcpSystem.sendMessage(message, prev.getNodeIP(), prev.getNodePort());
         } catch (IOException e) {
@@ -281,17 +282,18 @@ public class ChordNode {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        int succ = resultMap.get(Message.RETURN_FIND_SUCCESSOR).get(0);
+        Node successor = resultMap.get(Message.RETURN_FIND_SUCCESSOR);
+        int succ = successor.getNodeID();
         System.out.println("Successor is "+succ);
-        fingerTable[1].setSuccessor(succ);
+        fingerTable[1].setSuccessor(successor);
 
         // Ask for its predecessor
-        Node n = nodeList[succ];
+
         message = new Message();
         message.setType(Message.GET_PREDECESSOR);
         message.setNodeID(succ);
         try {
-            tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+            tcpSystem.sendMessage(message, successor.getNodeIP(), successor.getNodePort());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -300,14 +302,15 @@ public class ChordNode {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        int pre = resultMap.get(Message.RETURN_GET_PREDECESSOR).get(0);
+        prevNode = resultMap.get(Message.RETURN_GET_PREDECESSOR);
 
         // Set predecessor
         message = new Message();
         message.setType(Message.SET_PREDECESSOR);
         message.setNodeID(succ);
+        message.setNode(myNode);
         try {
-            tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+            tcpSystem.sendMessage(message, fingerTable[1].getSuccessor().getNodeIP(), fingerTable[1].getSuccessor().getNodePort());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -322,7 +325,7 @@ public class ChordNode {
         int next = 0;
         for (int i = 1; i <= maxRowIndex-1; i++) {
 
-            next = fingerTable[i].getSuccessor();
+            next = fingerTable[i].getSuccessor().getNodeID();
 
             if (myNodeID >= next) {
                 type = false;
@@ -338,7 +341,7 @@ public class ChordNode {
                 message = new Message();
                 message.setType(Message.FIND_SUCCESSOR);
                 message.setNodeID(fingerTable[1].getStart());
-                prev = nodeList[predID];
+
                 try {
                     tcpSystem.sendMessage(message, prev.getNodeIP(), prev.getNodePort());
                 } catch (IOException e) {
@@ -349,20 +352,20 @@ public class ChordNode {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                int successor = resultMap.get(Message.RETURN_FIND_SUCCESSOR).get(0);
-                int successorTemp = successor;
+                int successorID = resultMap.get(Message.RETURN_FIND_SUCCESSOR).getNodeID();
+                int successorTemp = successorID;
                 System.out.println("Successor is "+succ);
 
 
                 int fingerStart = nextFinger.getStart();
-                int fingerSuccessor = nextFinger.getSuccessor();
-                if (fingerStart > successor)
-                    successor = successor + nodesMax;
+                int fingerSuccessor = nextFinger.getSuccessor().getNodeID();
+                if (fingerStart > successorID)
+                    successorID = successorID + nodesMax;
                 if (fingerStart > fingerSuccessor)
                     fingerSuccessor = fingerSuccessor + nodesMax;
 
-                if ( fingerStart <= successor && successor <= fingerSuccessor ) {
-                    nextFinger.setSuccessor(successorTemp);
+                if ( fingerStart <= successorID && successorID <= fingerSuccessor ) {
+                    nextFinger.setSuccessor(resultMap.get(Message.RETURN_FIND_SUCCESSOR));
                 }
             }
         }
@@ -376,9 +379,8 @@ public class ChordNode {
             if (id < 0)
                 id = id + nodesMax;
 
-            int prevID = findPredecessor(id, tcpSystem);
-            Node p = nodeList[prevID];
-            Node n = nodeList[myNodeID];
+            Node p = findPredecessor(id, tcpSystem);
+            Node n = myNode;
             Message message = new Message();
             message.setType(Message.UPDATE_FINGERS);
             message.setNodeID(myNodeID);
@@ -403,7 +405,7 @@ public class ChordNode {
 
         boolean type = true;
         int currID = s.getNodeID();
-        int next = fingerTable[i].getSuccessor();
+        int next = fingerTable[i].getSuccessor().getNodeID();
         if (myNodeID >= next) {
             type = false;
         }else {
@@ -414,8 +416,8 @@ public class ChordNode {
                 (type==false && (currID >= myNodeID || currID < next)))
                 && (myNodeID != currID)) {
 
-            fingerTable[i].setSuccessor(currID);
-            Node n = nodeList[myPrevID];
+            fingerTable[i].setSuccessor(s);
+            Node n = prevNode;
             Message message = new Message();
             message.setType(Message.UPDATE_FINGERS);
             message.setNodeID(currID);
@@ -436,13 +438,12 @@ public class ChordNode {
 
     public static void insertContent(int key, String content, TCPSystem tcpSystem){
         System.out.println("*** Insert key "+ key +" Content "+content+" clear***");
-        int successor = findSuccessor(key, tcpSystem);
+        Node n = findSuccessor(key, tcpSystem);
 
         Message message = new Message();
         message.setType(Message.INSERT_CONTENT);
-        message.setNodeID(successor);
+        message.setNodeID(n.getNodeID());
         message.setContent(content);
-        Node n = nodeList[successor];
         try {
             tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
         } catch (IOException e) {
@@ -458,13 +459,13 @@ public class ChordNode {
 
     public static void lookupContent(int key, String content, TCPSystem tcpSystem){
         System.out.println("*** Lookup key "+ key +" Content "+content+" clear***");
-        int successor = findSuccessor(key, tcpSystem);
+        Node n = findSuccessor(key, tcpSystem);
 
         Message message = new Message();
         message.setType(Message.GET_CONTENT);
-        message.setNodeID(successor);
+        message.setNodeID(n.getNodeID());
         message.setContent(content);
-        Node n = nodeList[successor];
+
         try {
             tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
         } catch (IOException e) {
@@ -477,16 +478,16 @@ public class ChordNode {
         }
     }
 
-    public static int findSuccessor(int id, TCPSystem tcpSystem){
+    public static Node findSuccessor(int id, TCPSystem tcpSystem){
         System.out.println("Find successor of key"+id);
 
-        int predID = findPredecessor(id, tcpSystem);
-        System.out.println("Predecessor *** "+predID);
+        Node pred = findPredecessor(id, tcpSystem);
+        System.out.println("Predecessor *** "+pred.getNodeID());
         Message message = new Message();
         message.setType(Message.GET_SUCCESSOR);
-        Node n = nodeList[predID];
+
         try {
-            tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+            tcpSystem.sendMessage(message, pred.getNodeIP(), pred.getNodePort());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -496,23 +497,24 @@ public class ChordNode {
             e.printStackTrace();
         }
         for(int key:resultMap.keySet()){
-            Logging.print("Key "+key+" Value "+resultMap.get(key).get(0));
+            Logging.print("Key "+key+" Value "+resultMap.get(key).getNodeID());
         }
-        return resultMap.get(Message.RETURN_SUCCESSOR).get(0);
+        return resultMap.get(Message.RETURN_SUCCESSOR);
     }
 
-    public static int findPredecessor(int id, TCPSystem tcpSystem){
+    public static Node findPredecessor(int id, TCPSystem tcpSystem){
         System.out.println("*** Find predecessor " + id);
 
-        int successor = fingerTable[1].getSuccessor();
+        int successor = fingerTable[1].getSuccessor().getNodeID();
         int currNodeID = myNodeID;
         boolean type = true;
-        Node myNode = nodeList[myNodeID];
 
         if (currNodeID >= successor)
             type = false;
 
         Message message = null;
+        Node p = myNode;
+        Node nod = myNode;
 
         while ((type==true && (id <= currNodeID || id > successor)) ||
                 (type==false && (id <= currNodeID && id > successor))){
@@ -531,13 +533,14 @@ public class ChordNode {
                 e.printStackTrace();
             }
 
-            currNodeID = resultMap.get(Message.RETURN_CLOSESTFINGER).get(0);
+            nod = resultMap.get(Message.RETURN_CLOSESTFINGER);
+            currNodeID = nod.getNodeID();
 
             message = new Message();
             message.setType(Message.GET_SUCCESSOR);
 
             try {
-                tcpSystem.sendMessage(message, myNode.getNodeIP(), myNode.getNodePort());
+                tcpSystem.sendMessage(message, p.getNodeIP(), p.getNodePort());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -546,7 +549,7 @@ public class ChordNode {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            successor = resultMap.get(Message.RETURN_SUCCESSOR).get(0);
+            successor = resultMap.get(Message.RETURN_SUCCESSOR).getNodeID();
 
             if (currNodeID >= successor){
                 type = false;
@@ -555,12 +558,12 @@ public class ChordNode {
             }
         }
 
-        System.out.println("*** Return predecessor " + currNodeID);
-        return currNodeID;
+        System.out.println("*** Return predecessor " + nod.getNodeID());
+        return nod;
     }
 
 
-    public static int closestPrecedingFinger(int id){
+    public static Node closestPrecedingFinger(int id){
         // Returns the closest finger preceding id
         System.out.println("*** Get closest preceding finger" + id);
         int maxRowIndex = fingerTable.length -1;
@@ -571,24 +574,24 @@ public class ChordNode {
         }
 
         for (int i = maxRowIndex; i >= 1; i--) {
-            int nodeID = fingerTable[i].getSuccessor();
+            int nodeID = fingerTable[i].getSuccessor().getNodeID();
             if(type){
                 if (nodeID > myNodeID && nodeID < id) {
                     System.out.println("*** Return closest preceding finger #" + nodeID);
-                    return nodeID;
+                    return fingerTable[i].getSuccessor();
                 }
             }else{
                 if (nodeID > myNodeID || nodeID < id) {
                     System.out.println("*** Return closest preceding finger ##" + nodeID);
-                    return nodeID;
+                    return fingerTable[i].getSuccessor();
                 }
             }
         }
         System.out.println("*** Return closest preceding finger ### " + myNodeID);
-        return myNodeID;
+        return myNode;
     }
 
-    public static int getSuccessor(){
+    public static Node getSuccessor(){
         return fingerTable[1].getSuccessor();
     }
 

@@ -6,7 +6,7 @@ public class Finger{
     private int start;
     private int intervalStart;
     private int intervalEnd;
-    private int successor;
+    private Node successor;
 
     public int getIndex() {
         return index;
@@ -40,15 +40,15 @@ public class Finger{
         this.intervalEnd = intervalEnd;
     }
 
-    public int getSuccessor() {
+    public Node getSuccessor() {
         return successor;
     }
 
-    public void setSuccessor(int successor) {
+    public void setSuccessor(Node successor) {
         this.successor = successor;
     }
 
-    public Finger(int start, int successor) {
+    public Finger(int start, Node successor) {
         this.start = start;
         this.successor = successor;
     }
@@ -59,6 +59,6 @@ public class Finger{
 
     @Override
     public String toString() {
-        return ("Index "+index+", Start "+start+", Interval ["+intervalStart+", "+intervalEnd+"], Successor "+successor);
+        return ("Index "+index+", Start "+start+", Interval ["+intervalStart+", "+intervalEnd+"], Successor "+successor.getNodeID());
     }
 }

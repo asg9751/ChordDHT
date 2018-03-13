@@ -28,15 +28,18 @@ public class RegistrationServer{
 
                         int nodeID = recvdMessage.getNodeID();
                         Logging.print("NodeID Server :"+ nodeID );
-                        // hash nodeID here and return to client node. Also send predecessor id to client.
+                        // hash nodeID here and return to client node. Also send predecessor to client.
                         addNode(nodeID, ip, SEND_PORT);
                         int predID = getPredecessor(nodeID);
+                        Node pred = nodeList[predID];
                         sendMessage = new Message();
                         sendMessage.setType(Message.RETURN_NODE_AUTHENTICATION);
-                        sendMessage.setNodeID(nodeID);
-                        sendMessage.setPredID(predID);
+                        //sendMessage.setNodeID(nodeID);
+                        //sendMessage.setPredID(predID);
+                        sendMessage.setNode(new Node(nodeID,ip,SEND_PORT));
+                        sendMessage.setPrev(pred);
                         sendMessage.setMaxNodes(MAX_NODES);
-                        sendMessage.setNodeList(nodeList);
+                        //sendMessage.setNodeList(nodeList);
                         try {
 
                             tcpSystem.sendMessage(sendMessage, ip, SEND_PORT);
@@ -72,6 +75,7 @@ public class RegistrationServer{
         if (nodeList[nodeId] == null){
             nodeList[nodeId]= new Node(nodeId,ip,port);
             nodeIds.add(nodeId);
+            nodescount++;
             Logging.print("New node added with id "+nodeId);
         }
     }
