@@ -5,10 +5,7 @@ import edu.rit.CSCI652.ChordDHT.model.Message;
 import edu.rit.CSCI652.ChordDHT.model.Node;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ChordNode {
     public static final String SERVER_IP = "172.17.0.2";
@@ -17,15 +14,17 @@ public class ChordNode {
     public static final int RECEIVE_PORT = 6790;
     private static Finger[] fingerTable;
     //TCPSystem tcpSystem;
-    static int myNodeID = 0;
-    static int myPrevID = 0;
-    static int nodesMax = 0;
-    static Node[] nodeList;
-    static HashMap<Integer,List<Integer>> resultMap = new HashMap<Integer,List<Integer>>();
+    private static int myNodeID = 0;
+    private static int myPrevID = 0;
+    private static int nodesMax = 0;
+    private static Node[] nodeList;
+    private static HashMap<Integer,List<Integer>> resultMap = new HashMap<Integer,List<Integer>>();
+    private static List<String>  contentList = new ArrayList<String>();
 
     public static void main(String[] args) {
         ChordMenu chordMenu = new ChordMenu();
         TCPSystem tcpSystem = new TCPSystem(SEND_PORT, RECEIVE_PORT);
+
 
             tcpSystem.setTCPInterface(new ServerI() {
                 @Override
@@ -139,6 +138,12 @@ public class ChordNode {
                             Node n = new Node(updId,ipaddr,nodePort);
                             updateFingerTable(n,index,tcpSystem);
                             break;
+
+                        case Message.INSERT_CONTENT:
+                            String content = recvdMessage.getContent();
+                            contentList.add(content);
+                            System.out.println("Inserted content "+content+" at node "+myNodeID);
+                            break;
                     }
                 }
             });
@@ -157,7 +162,12 @@ public class ChordNode {
 
                 @Override
                 public void invokeInsertKey(){
-
+                    Scanner input = new Scanner(System.in);
+                    System.out.print("Please enter key for the content: ");
+                    int key = Integer.valueOf(input.nextLine());
+                    System.out.print("Please enter the content: ");
+                    String content = input.nextLine();
+                    insertContent(key, content, tcpSystem);
                 }
 
                 @Override
@@ -391,6 +401,28 @@ public class ChordNode {
             }
 
         }
+    }
+
+    public static void insertContent(int key, String content, TCPSystem tcpSystem){
+        System.out.println("*** Insert key "+ key +" Content "+content+" clear***");
+        int successor = findSuccessor(key, tcpSystem);
+
+        Message message = new Message();
+        message.setType(Message.INSERT_CONTENT);
+        message.setNodeID(successor);
+        message.setContent(content);
+        Node n = nodeList[successor];
+        try {
+            tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(" *** Content inserted succesfully ***");
     }
 
     public static int findSuccessor(int id, TCPSystem tcpSystem){

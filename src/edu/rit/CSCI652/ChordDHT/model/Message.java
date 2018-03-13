@@ -8,6 +8,7 @@ public class Message {
     private int index;
     private String ip;
     private int port;
+    private String content;
     Node[] nodeList;
 
     public static final int NODE_AUTHENTICATION = 0;
@@ -22,6 +23,15 @@ public class Message {
     public static final int GET_CLOSESTFINGER = 9;
     public static final int RETURN_CLOSESTFINGER = 10;
     public static final int UPDATE_FINGERS = 11;
+    public static final int INSERT_CONTENT = 12;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getIp() {
         return ip;
