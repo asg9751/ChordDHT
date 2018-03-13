@@ -18,6 +18,7 @@ public class TCPSystem {
     public int receivePort;
     ServerI serverI;
 
+
     public TCPSystem(int sendPort, int receivePort)
     {
         this.sendPort = sendPort;
@@ -25,19 +26,19 @@ public class TCPSystem {
     }
 
 
-    public void sendMessage(Message message, String ipAddress) throws IOException
+    public void sendMessage(Message message, String ipAddress, int port) throws IOException
     {
 
         Gson gson = new Gson();
         String messageStr = gson.toJson(message);
-        sendToClient(messageStr, ipAddress, sendPort);
+        sendToClient(messageStr, ipAddress, port);
     }
 
     public void setTCPInterface(ServerI serverI){
         this.serverI = serverI;
     }
 
-    public void startRegServer()
+    public void startServer()
     {
         new Thread()
         {
@@ -64,19 +65,19 @@ public class TCPSystem {
                                 }
                                 public synchronized void handleMessage() {
                                     String recieverIp = receiverSocket.getInetAddress().getHostAddress();
+                                    int recieverPort = receiverSocket.getLocalPort();
 
                                     try
                                     {
                                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(receiverSocket.getInputStream()));
                                         String messageStr = bufferedReader.readLine();
-
                                         receiverSocket.close(); //Close connection after reading
 
                                         if (messageStr != null)
                                         {
                                             Gson gson = new Gson();
                                             Message message = gson.fromJson(messageStr, Message.class);
-                                            serverI.gotMessage(message, recieverIp);
+                                            serverI.gotMessage(message, recieverIp, recieverPort);
                                         }
 
                                     } catch (IOException e)
@@ -112,7 +113,7 @@ public class TCPSystem {
 
 
         InetAddress inetAddress = Inet4Address.getByName(ipAddress);
-        System.out.println("Sending to:" + ipAddress);
+        System.out.println("Sending to:" + ipAddress+" at port " +port);
         Socket receiverSocket = new Socket(inetAddress, port);
         DataOutputStream dataOutputStream = new DataOutputStream(receiverSocket.getOutputStream());
         dataOutputStream.writeBytes(line);
@@ -120,6 +121,5 @@ public class TCPSystem {
 
 
     }
-
 
 }

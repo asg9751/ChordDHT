@@ -17,7 +17,7 @@ public class RegistrationServer{
         TCPSystem tcpSystem = new TCPSystem(SEND_PORT, RECEIVE_PORT);
         tcpSystem.setTCPInterface(new ServerI() {
             @Override
-            public void gotMessage(Message recvdMessage, String ip) {
+            public void gotMessage(Message recvdMessage, String ip, int port) {
                 Logging.print("PORT:" + SEND_PORT + ", type:" + recvdMessage.getType());
 
                 Message sendMessage = null;
@@ -32,13 +32,14 @@ public class RegistrationServer{
                         addNode(nodeID, ip, SEND_PORT);
                         int predID = getPredecessor(nodeID);
                         sendMessage = new Message();
-                        sendMessage.setType(Message.NODE_AUTHENTICATION);
+                        sendMessage.setType(Message.RETURN_NODE_AUTHENTICATION);
                         sendMessage.setNodeID(nodeID);
                         sendMessage.setPredID(predID);
                         sendMessage.setMaxNodes(MAX_NODES);
+                        sendMessage.setNodeList(nodeList);
                         try {
 
-                            tcpSystem.sendMessage(sendMessage, ip);
+                            tcpSystem.sendMessage(sendMessage, ip, SEND_PORT);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -48,7 +49,7 @@ public class RegistrationServer{
                 }
             }
         });
-        tcpSystem.startRegServer();
+        tcpSystem.startServer();
 
     }
     private int getPredecessor(int nodeId){

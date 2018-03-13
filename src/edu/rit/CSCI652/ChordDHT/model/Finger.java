@@ -56,4 +56,9 @@ public class Finger{
     public Finger() {
 
     }
+
+    @Override
+    public String toString() {
+        return ("Index "+index+", Start "+start+", Interval ["+intervalStart+", "+intervalEnd+"], Successor "+successor);
+    }
 }
