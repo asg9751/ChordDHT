@@ -130,6 +130,15 @@ public class ChordNode {
                             Logging.print(" Return closest finger "+cloId);
                             resultMap.put(Message.RETURN_CLOSESTFINGER, Arrays.asList(cloId));
                             break;
+
+                        case Message.UPDATE_FINGERS:
+                            int updId = recvdMessage.getNodeID();
+                            String ipaddr = recvdMessage.getIp();
+                            int nodePort = recvdMessage.getPort();
+                            int index = recvdMessage.getIndex();
+                            Node n = new Node(updId,ipaddr,nodePort);
+                            updateFingerTable(n,index,tcpSystem);
+                            break;
                     }
                 }
             });
@@ -143,6 +152,7 @@ public class ChordNode {
                     for (int i = 1; i <= maxRowIndex; i++) {
                         System.out.println(fingerTable[i]);
                     }
+                    chordMenu.showMenu();
                 }
 
                 @Override
@@ -206,7 +216,7 @@ public class ChordNode {
                 initFingerTable(predID, nodeList, tcpSystem);
                 Logging.print("Finger table initialized");
                 // Update finger table of other nodes
-                //update_others();
+                updateOthers(tcpSystem);
                 Logging.print("Updated finger table of others");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -314,6 +324,72 @@ public class ChordNode {
                     nextFinger.setSuccessor(successorTemp);
                 }
             }
+        }
+    }
+
+    public static void updateOthers(TCPSystem tcpSystem){
+
+        int maxRowIndex = fingerTable.length -1;
+        for (int i = 1; i <= maxRowIndex; i++) {
+            int id = myNodeID - (int)Math.pow(2,i-1) + 1;
+            if (id < 0)
+                id = id + nodesMax;
+
+            int prevID = findPredecessor(id, tcpSystem);
+            Node p = nodeList[prevID];
+            Node n = nodeList[myNodeID];
+            Message message = new Message();
+            message.setType(Message.UPDATE_FINGERS);
+            message.setNodeID(myNodeID);
+            message.setIp(n.getNodeIP());
+            message.setPort(n.getNodePort());
+            message.setIndex(i);
+            try {
+                tcpSystem.sendMessage(message, p.getNodeIP(), p.getNodePort());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public static void updateFingerTable(Node s, int i, TCPSystem tcpSystem){
+
+        boolean type = true;
+        int currID = s.getNodeID();
+        int next = fingerTable[i].getSuccessor();
+        if (myNodeID >= next) {
+            type = false;
+        }else {
+            type = true;
+        }
+        // Current node id is in between myNodeID and next
+        if ( ((type==true && (currID >= myNodeID && currID < next)) ||
+                (type==false && (currID >= myNodeID || currID < next)))
+                && (myNodeID != currID)) {
+
+            fingerTable[i].setSuccessor(currID);
+            Node n = nodeList[myPrevID];
+            Message message = new Message();
+            message.setType(Message.UPDATE_FINGERS);
+            message.setNodeID(currID);
+            message.setIndex(i);
+            try {
+                tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

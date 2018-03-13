@@ -4,10 +4,6 @@
     <list default="true" id="e11443fd-b61e-490b-9f3d-413d11444b8a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/RegistrationServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ServerI.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ServerI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/TCPSystem.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/TCPSystem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Finger.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Finger.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java" afterPath="$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,13 +84,13 @@
       <file leaf-file-name="ChordNode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-748">
-              <caret line="304" column="0" lean-forward="true" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+            <state relative-caret-position="242">
+              <caret line="154" column="41" lean-forward="true" selection-start-line="154" selection-start-column="41" selection-end-line="154" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#790#813#0" expanded="true" />
-                <element signature="e#16765#16766#0" expanded="true" />
-                <element signature="e#16817#16818#0" expanded="true" />
+                <element signature="e#19496#19497#0" expanded="true" />
+                <element signature="e#19548#19549#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,21 +99,32 @@
       <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+            <state relative-caret-position="375">
+              <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
               <folding>
-                <element signature="e#785#786#0" expanded="true" />
-                <element signature="e#816#817#0" expanded="true" />
-                <element signature="e#861#862#0" expanded="true" />
-                <element signature="e#901#902#0" expanded="true" />
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#961#962#0" expanded="true" />
-                <element signature="e#1002#1003#0" expanded="true" />
-                <element signature="e#1038#1039#0" expanded="true" />
-                <element signature="e#1073#1074#0" expanded="true" />
-                <element signature="e#1104#1105#0" expanded="true" />
-                <element signature="e#1152#1153#0" expanded="true" />
-                <element signature="e#1192#1193#0" expanded="true" />
+                <element signature="e#924#925#0" expanded="true" />
+                <element signature="e#960#961#0" expanded="true" />
+                <element signature="e#988#989#0" expanded="true" />
+                <element signature="e#1016#1017#0" expanded="true" />
+                <element signature="e#1043#1044#0" expanded="true" />
+                <element signature="e#1080#1081#0" expanded="true" />
+                <element signature="e#1112#1113#0" expanded="true" />
+                <element signature="e#1141#1142#0" expanded="true" />
+                <element signature="e#1169#1170#0" expanded="true" />
+                <element signature="e#1208#1209#0" expanded="true" />
+                <element signature="e#1242#1243#0" expanded="true" />
+                <element signature="e#1274#1275#0" expanded="true" />
+                <element signature="e#1305#1306#0" expanded="true" />
+                <element signature="e#1350#1351#0" expanded="true" />
+                <element signature="e#1390#1391#0" expanded="true" />
+                <element signature="e#1421#1422#0" expanded="true" />
+                <element signature="e#1450#1451#0" expanded="true" />
+                <element signature="e#1491#1492#0" expanded="true" />
+                <element signature="e#1527#1528#0" expanded="true" />
+                <element signature="e#1562#1563#0" expanded="true" />
+                <element signature="e#1593#1594#0" expanded="true" />
+                <element signature="e#1641#1642#0" expanded="true" />
+                <element signature="e#1681#1682#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,7 +133,7 @@
       <file leaf-file-name="ChordMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="-306">
               <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="56" />
               <folding />
             </state>
@@ -403,12 +410,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1520751765793</updated>
-      <workItem from="1520751767410" duration="67015000" />
+      <workItem from="1520751767410" duration="73863000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67015000" />
+    <option name="totallyTimeSpent" value="73863000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -453,14 +460,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/TCPSystem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -469,27 +468,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1653#1654#0" expanded="true" />
             <element signature="e#1740#1741#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-          <folding>
-            <element signature="e#785#786#0" expanded="true" />
-            <element signature="e#816#817#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#901#902#0" expanded="true" />
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#961#962#0" expanded="true" />
-            <element signature="e#1002#1003#0" expanded="true" />
-            <element signature="e#1038#1039#0" expanded="true" />
-            <element signature="e#1073#1074#0" expanded="true" />
-            <element signature="e#1104#1105#0" expanded="true" />
-            <element signature="e#1152#1153#0" expanded="true" />
-            <element signature="e#1192#1193#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -536,15 +514,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/model/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+          <folding>
+            <element signature="e#924#925#0" expanded="true" />
+            <element signature="e#960#961#0" expanded="true" />
+            <element signature="e#988#989#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1080#1081#0" expanded="true" />
+            <element signature="e#1112#1113#0" expanded="true" />
+            <element signature="e#1141#1142#0" expanded="true" />
+            <element signature="e#1169#1170#0" expanded="true" />
+            <element signature="e#1208#1209#0" expanded="true" />
+            <element signature="e#1242#1243#0" expanded="true" />
+            <element signature="e#1274#1275#0" expanded="true" />
+            <element signature="e#1305#1306#0" expanded="true" />
+            <element signature="e#1350#1351#0" expanded="true" />
+            <element signature="e#1390#1391#0" expanded="true" />
+            <element signature="e#1421#1422#0" expanded="true" />
+            <element signature="e#1450#1451#0" expanded="true" />
+            <element signature="e#1491#1492#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1562#1563#0" expanded="true" />
+            <element signature="e#1593#1594#0" expanded="true" />
+            <element signature="e#1641#1642#0" expanded="true" />
+            <element signature="e#1681#1682#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="7" column="56" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/edu/rit/CSCI652/ChordDHT/impl/ChordNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-748">
-          <caret line="304" column="0" lean-forward="true" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+        <state relative-caret-position="242">
+          <caret line="154" column="41" lean-forward="true" selection-start-line="154" selection-start-column="41" selection-end-line="154" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#790#813#0" expanded="true" />
-            <element signature="e#16765#16766#0" expanded="true" />
-            <element signature="e#16817#16818#0" expanded="true" />
+            <element signature="e#19496#19497#0" expanded="true" />
+            <element signature="e#19548#19549#0" expanded="true" />
           </folding>
         </state>
       </provider>
