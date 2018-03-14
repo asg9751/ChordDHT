@@ -35,4 +35,9 @@ public class Node{
         this.nodeIP = ip;
         this.nodePort = port;
     }
+
+    @Override
+    public String toString() {
+        return "NodeID "+nodeID +"nodeIP "+nodeIP+"nodePort "+nodePort;
+    }
 }
