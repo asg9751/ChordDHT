@@ -170,6 +170,12 @@ public class ChordNode {
                             String contentStr = recvdMessage.getContent();
                             System.out.println("Content is >>> "+contentStr);
                             break;
+
+                        case Message.SET_CONTENT:
+                            String contents = recvdMessage.getContent();
+                            contentList.addAll(Arrays.asList(contents.split(":")));
+                            System.out.println("Added contents from node"+recvdMessage.getNodeID());
+                            break;
                     }
                 }
             });
@@ -207,6 +213,7 @@ public class ChordNode {
                 @Override
                 public void invokeLeave(){
                     // Update finger table of others and transfer content to successor
+                    transferContent(myNode,tcpSystem);
                 }
             });
 
@@ -480,6 +487,28 @@ public class ChordNode {
             e.printStackTrace();
         }
 
+
+    }
+
+    public static void transferContent(Node node, TCPSystem tcpSystem){
+        System.out.println("*** Transferring content of node "+ node.getNodeID());
+        Node n = findSuccessor(node.getNodeID(), tcpSystem);
+        String result = "";
+        for(String str: contentList){
+            result += str+":";
+        }
+        result = result.substring(0,result.length()-1);
+
+        Message message = new Message();
+        message.setType(Message.SET_CONTENT);
+        message.setNodeID(n.getNodeID());
+        message.setContent(result);
+
+        try {
+            tcpSystem.sendMessage(message, n.getNodeIP(), n.getNodePort());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

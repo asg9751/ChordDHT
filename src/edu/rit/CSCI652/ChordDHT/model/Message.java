@@ -27,6 +27,7 @@ public class Message {
     public static final int INSERT_CONTENT = 12;
     public static final int GET_CONTENT = 13;
     public static final int RETURN_GET_CONTENT = 14;
+    public static final int SET_CONTENT = 15;
 
     public Node getNode() {
         return node;
