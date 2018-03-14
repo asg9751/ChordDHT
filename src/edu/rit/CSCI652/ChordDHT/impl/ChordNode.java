@@ -205,8 +205,8 @@ public class ChordNode {
                 }
 
                 @Override
-                public void invokeRemove(){
-                // Same as lookup. Find the successor from key and remove the word from contentList
+                public void invokeLeave(){
+
                 }
             });
 
@@ -357,7 +357,7 @@ public class ChordNode {
                     e.printStackTrace();
                 }
                 try {
-                    Thread.sleep(900);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -466,7 +466,7 @@ public class ChordNode {
     }
 
     public static void lookupContent(int key, String content, TCPSystem tcpSystem){
-        System.out.println("*** Lookup key "+ key +" Content "+content+" clear***");
+        System.out.println("*** Lookup key "+ key +" Content "+content+" ***");
         Node n = findSuccessor(key, tcpSystem);
 
         Message message = new Message();

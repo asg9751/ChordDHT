@@ -34,12 +34,9 @@ public class RegistrationServer{
                         Node pred = nodeList[predID];
                         sendMessage = new Message();
                         sendMessage.setType(Message.RETURN_NODE_AUTHENTICATION);
-                        //sendMessage.setNodeID(nodeID);
-                        //sendMessage.setPredID(predID);
                         sendMessage.setNode(new Node(nodeID,ip,SEND_PORT));
                         sendMessage.setPrev(pred);
                         sendMessage.setMaxNodes(MAX_NODES);
-                        //sendMessage.setNodeList(nodeList);
                         try {
 
                             tcpSystem.sendMessage(sendMessage, ip, SEND_PORT);

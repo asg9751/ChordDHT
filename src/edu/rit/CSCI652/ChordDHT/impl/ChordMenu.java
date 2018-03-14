@@ -16,7 +16,7 @@ public class ChordMenu {
 
         void invokeLookup();
 
-        void invokeRemove();
+        void invokeLeave();
     }
 
     public void printMenu(){
@@ -26,7 +26,6 @@ public class ChordMenu {
         System.out.println("1. Print Finger Table");
         System.out.println("2. Insert");
         System.out.println("3. Lookup");
-        System.out.println("4. Remove");
         System.out.println("0. Exit\n");
         System.out.print("Choose menu option : ");
     }
@@ -53,17 +52,16 @@ public class ChordMenu {
                 System.out.println("**** Starting insert key ****\n");
                 menuInterface.invokeInsertKey();
                 return;
+
             case 3:
                 System.out.println("**** Starting lookup key ****\n");
                 menuInterface.invokeLookup();
                 return;
-            case 4:
-                System.out.println("**** Starting remove key ****\n");
-                menuInterface.invokeRemove();
-                return;
+
             case 0:
                 exit = true;
                 System.out.println("**** Exiting Chord Menu ****\n");
+                menuInterface.invokeLeave();
                 return;
             default:
                 System.out.println("Invalid choice \n");
