@@ -206,7 +206,7 @@ public class ChordNode {
 
                 @Override
                 public void invokeLeave(){
-
+                    // Update finger table of others and transfer content to successor
                 }
             });
 
@@ -284,7 +284,7 @@ public class ChordNode {
             e.printStackTrace();
         }
         try {
-            Thread.sleep(500);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -304,7 +304,7 @@ public class ChordNode {
             e.printStackTrace();
         }
         try {
-            Thread.sleep(200);
+            Thread.sleep(600);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -357,7 +357,7 @@ public class ChordNode {
                     e.printStackTrace();
                 }
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -479,11 +479,8 @@ public class ChordNode {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+
     }
 
     public static Node findSuccessor(int id, TCPSystem tcpSystem){
@@ -500,7 +497,7 @@ public class ChordNode {
             e.printStackTrace();
         }
         try {
-            Thread.sleep(200);
+            Thread.sleep(600);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -536,7 +533,7 @@ public class ChordNode {
                 e.printStackTrace();
             }
             try {
-                Thread.sleep(200);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
