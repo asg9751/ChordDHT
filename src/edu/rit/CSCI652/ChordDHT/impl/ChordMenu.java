@@ -1,3 +1,7 @@
+/**
+ * @author Amol Gaikwad
+ * Chord Menu acts as the menu interface for chord node
+ */
 package edu.rit.CSCI652.ChordDHT.impl;
 
 import java.util.Scanner;

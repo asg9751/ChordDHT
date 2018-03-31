@@ -1,3 +1,7 @@
+/**
+ * @author Amol Gaikwad
+ * Model for message. Holds the type of message and node attributes such as ip, port and content.
+ */
 package edu.rit.CSCI652.ChordDHT.model;
 
 public class Message {

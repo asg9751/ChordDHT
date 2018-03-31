@@ -1,3 +1,7 @@
+/**
+ * @author Amol Gaikwad
+ * Model for Chord Node
+ */
 package edu.rit.CSCI652.ChordDHT.model;
 
 public class Node{

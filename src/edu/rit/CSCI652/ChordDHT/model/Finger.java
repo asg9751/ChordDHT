@@ -1,3 +1,7 @@
+/**
+ * @author Amol Gaikwad
+ * Finger Table model
+ */
 package edu.rit.CSCI652.ChordDHT.model;
 
 public class Finger{

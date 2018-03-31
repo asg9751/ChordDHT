@@ -1,3 +1,7 @@
+/**
+ * @author Amol Gaikwad
+ * ChordNode responsible for maintaining finger table, updating other nodes finger table, storing and retrieving content
+ */
 package edu.rit.CSCI652.ChordDHT.impl;
 
 import edu.rit.CSCI652.ChordDHT.model.Finger;

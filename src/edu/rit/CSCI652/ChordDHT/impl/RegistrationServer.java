@@ -1,3 +1,8 @@
+/**
+ * @author Amol Gaikwad
+ * RegistrationServer holds the list of online nodes and returns the node id for chord node
+ */
+
 package edu.rit.CSCI652.ChordDHT.impl;
 import edu.rit.CSCI652.ChordDHT.model.Message;
 import edu.rit.CSCI652.ChordDHT.model.Node;

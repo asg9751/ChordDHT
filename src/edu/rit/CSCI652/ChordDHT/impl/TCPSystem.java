@@ -1,3 +1,8 @@
+/**
+ * @author Amol Gaikwad
+ *         Utility class to handle TCP
+ */
+
 package edu.rit.CSCI652.ChordDHT.impl;
 
 import java.io.BufferedReader;

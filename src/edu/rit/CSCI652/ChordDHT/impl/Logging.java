@@ -2,7 +2,6 @@ package edu.rit.CSCI652.ChordDHT.impl;
 
 /**
  * @author Amol Gaikwad
- * <p>
  * Logging utility
  */
 
